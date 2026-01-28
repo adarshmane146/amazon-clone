@@ -1,0 +1,29 @@
+name: Amazon Clone CI
+on: [push, pull_request] # Runs every time you push code
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Uses a fresh Linux machine
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          cd frontend && npm install
+          cd ../backend && npm install
+
+      - name: Run Backend Tests
+        run: cd backend && npm test
+
+      - name: Run Playwright E2E Tests
+        run: |
+          npx playwright install --with-deps
+          npx playwright test

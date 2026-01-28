@@ -1,0 +1,16 @@
+# node modules
+node_modules/
+
+# env files
+.env
+
+# build files
+dist/
+build/
+
+# test reports
+playwright-report/
+test-results/
+
+# logs
+*.log
